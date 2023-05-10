@@ -1,4 +1,11 @@
-localStorage.setItem("text", 1);
+if (localStorage.getItem("information")) {
+  let information = JSON.parse(localStorage.getItem("information"));
+
+  document.getElementById("name").value = information.name;
+  document.getElementById("email").value = information.email;
+
+  document.getElementById("message").value = information.message;
+}
 function sendName() {
   const nameInput = document.getElementById("name");
   if (nameInput.value) {
@@ -49,4 +56,30 @@ function deleteMessage() {
   } else {
     alert("no message");
   }
+}
+
+function reset() {
+  localStorage.clear();
+
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+
+  document.getElementById("message").value = "";
+}
+
+function sendAll() {
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const msgInput = document.getElementById("message");
+  let info = {
+    name: nameInput.value,
+    email: emailInput.value,
+    message: msgInput.value,
+  };
+  localStorage.setItem("information", JSON.stringify(info));
+
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+
+  document.getElementById("message").value = "";
 }
